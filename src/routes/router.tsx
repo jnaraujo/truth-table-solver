@@ -1,13 +1,15 @@
 import { createBrowserRouter } from "react-router-dom"
+import Layout from "./layout.tsx"
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    lazy: async () => {
-      const Component = await import("./home/index.tsx")
-      return {
-        Component: Component.default,
-      }
-    },
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        lazy: () => import("./page.tsx"),
+      },
+    ],
   },
 ])
