@@ -1,5 +1,5 @@
-export function generateTruthTable(n: number, defaultOutput = 0) {
-  const table = new Map<string, string | number>()
+export function generateTruthTable(n: number, defaultOutput = "0") {
+  const table = new Map<string, string>()
   const max = Math.pow(2, n)
 
   for (let i = 0; i < max; i++) {
@@ -12,10 +12,7 @@ export function generateTruthTable(n: number, defaultOutput = 0) {
   return table
 }
 
-export function setOutputsFor(
-  inputs: (string | number)[][],
-  table: Map<string, string | number>,
-) {
+export function setOutputsFor(inputs: string[][], table: Map<string, string>) {
   for (const key of table.keys()) {
     const binary = key.split("")
 
@@ -38,5 +35,29 @@ export function setOutputsFor(
         table.set(key, output)
       }
     }
+  }
+
+  let output = ""
+  for (const key of table.keys()) {
+    output += table.get(key)
+  }
+
+  const positionsWithOne = []
+  for (let i = 0; i < output.length; i++) {
+    if (output[i] === "1") {
+      positionsWithOne.push(i)
+    }
+  }
+
+  const positionsWithDontCare = []
+  for (let i = 0; i < output.length; i++) {
+    if (output[i] === "#") {
+      positionsWithDontCare.push(i)
+    }
+  }
+
+  return {
+    positionsWithOne,
+    positionsWithDontCare,
   }
 }
