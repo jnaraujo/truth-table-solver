@@ -1,6 +1,7 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
 import { useCallback, useMemo } from "react"
 import TableInput from "./table-input"
+import { cn } from "@/lib/utils"
 
 interface Props {
   lineIndex: number
@@ -9,6 +10,7 @@ interface Props {
 export default function TableLine({ lineIndex }: Props) {
   const removeIndex = useTruthTableStore((s) => s.removeIndex)
   const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
+  const isKeyDuplicated = useTruthTableStore((s) => s.isKeyDuplicated)
   const line = useTruthTableStore((s) => s.table[lineIndex])
 
   const inputs = useMemo(() => {
@@ -36,7 +38,11 @@ export default function TableLine({ lineIndex }: Props) {
   )
 
   return (
-    <div className="flex gap-8">
+    <div
+      className={cn("flex gap-8 rounded-sm px-1", {
+        "bg-red-200": isKeyDuplicated(line[0]),
+      })}
+    >
       <div className="flex gap-2">
         {inputs.map((value, index) => (
           <div key={index} className="flex w-28 items-center justify-center">

@@ -13,7 +13,7 @@ export default function Table() {
 
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex gap-8 border-b border-zinc-600 py-1">
+      <div className="flex gap-8 border-b border-zinc-600 px-1 py-1">
         <Variables />
         <div className="flex gap-2">
           <div className="flex w-28 items-center justify-center">Saída</div>

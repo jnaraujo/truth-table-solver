@@ -4,6 +4,7 @@ interface TruthTableStore {
   table: [string, string][]
   variables: string[]
 
+  isKeyDuplicated(key: string): boolean
   addValue(value: [string, string]): void
   updateValueFromIndex(index: number, value: [string, string]): void
   findValue(value: string): [string, string] | undefined
@@ -55,6 +56,18 @@ export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
       newArr.splice(index, 1)
       return { table: newArr }
     })
+  },
+  isKeyDuplicated(key: string) {
+    let founded = false
+
+    for (const item of get().table) {
+      if (founded) return true
+
+      if (item[0] === key) {
+        founded = true
+      }
+    }
+    return false
   },
 
   setVariables(variables: string[]) {
