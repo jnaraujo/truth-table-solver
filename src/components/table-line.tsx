@@ -42,40 +42,45 @@ export default function TableLine({ lineIndex }: Props) {
 
   return (
     <div
-      className={cn("group flex gap-8 rounded-sm px-1", {
-        "bg-red-100": isKeyDuplicated,
-      })}
+      className={cn(
+        "group relative flex h-8 w-full justify-center gap-8 rounded-md px-1",
+        {
+          "bg-red-100": isKeyDuplicated,
+        },
+      )}
     >
-      <div className="flex gap-2">
-        {inputs.map((value, index) => (
-          <div key={index} className="flex w-28 items-center justify-center">
+      <div className="flex gap-8">
+        <div className="flex gap-2">
+          {inputs.map((value, index) => (
+            <div key={index} className="flex w-28 items-center justify-center">
+              <TableInput
+                index={index}
+                value={value as "#" | "0" | "1"}
+                onChange={handleOnInputChange}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          <div className="flex w-28 items-center justify-center">
             <TableInput
-              index={index}
-              value={value as "#" | "0" | "1"}
-              onChange={handleOnInputChange}
+              index={0}
+              value={output as "#" | "0" | "1"}
+              onChange={handleOnOutputChange}
             />
           </div>
-        ))}
-      </div>
-
-      <div className="flex gap-2">
-        <div className="flex w-28 items-center justify-center">
-          <TableInput
-            index={0}
-            value={output as "#" | "0" | "1"}
-            onChange={handleOnOutputChange}
-          />
         </div>
       </div>
 
       <button
         type="button"
-        className="w-10 rounded px-2 py-1 text-red-500 opacity-0 transition-opacity group-hover:opacity-100"
+        className="absolute right-0 top-1/2 w-10 translate-y-[-50%] rounded px-2 py-1 text-red-500 opacity-0 transition-opacity group-hover:opacity-100"
         onClick={() => {
           removeIndex(lineIndex)
         }}
       >
-        <Trash2 />
+        <Trash2 size={22} />
       </button>
     </div>
   )

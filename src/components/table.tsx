@@ -22,30 +22,15 @@ export default function Table() {
   }, [tableLength])
 
   return (
-    <section className="flex flex-col gap-2">
-      <div className="flex gap-8 border-b border-zinc-600 px-1 py-1">
-        <div className="flex gap-2">
-          {variables.map((item, index) => (
-            <div
-              key={item + index}
-              className="flex w-28 items-center justify-center"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <div className="flex w-28 items-center justify-center">Saída</div>
-        </div>
-        <div className="w-10" />
-      </div>
+    <section className="flex w-full flex-col gap-2">
+      <Top />
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col items-center gap-2">
         {indexTable.map((index) => (
           <TableLine key={index} lineIndex={index} />
         ))}
 
-        <div className="flex justify-between">
+        <div className="mt-4 flex w-full justify-between">
           <button
             type="button"
             className="flex gap-1 rounded bg-green-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-green-600"
@@ -69,5 +54,27 @@ export default function Table() {
         </div>
       </div>
     </section>
+  )
+}
+
+function Top() {
+  const variables = useTruthTableStore((s) => s.variables)
+
+  return (
+    <div className="flex justify-center gap-8 border-b border-zinc-600 px-1 py-1">
+      <div className="flex gap-2">
+        {variables.map((item, index) => (
+          <div
+            key={item + index}
+            className="flex w-28 items-center justify-center"
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <div className="flex w-28 items-center justify-center">Saída</div>
+      </div>
+    </div>
   )
 }
