@@ -6,8 +6,8 @@ import {
 } from "@/lib/truth-table"
 import { useTruthTableStore } from "@/store/truth-table-store"
 import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
+import { toast } from "sonner"
 
 export default function TableTop() {
   const [equation, setEquation] = useState<string>("")
@@ -44,7 +44,9 @@ export default function TableTop() {
             onClick={() => {
               navigator.clipboard.writeText(equation)
               toast.success("Equação copiada para a área de transferência.", {
+                className: "!text-green-600",
                 position: "top-right",
+                duration: 2000,
               })
             }}
           >
