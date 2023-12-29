@@ -45,7 +45,12 @@ export default function TableTop() {
           })
         }}
       >
-        Equação de Saída: <output>{equation}</output>
+        Equação de Saída:{" "}
+        <output>
+          <pre className="rounded-md bg-zinc-200 px-2 transition-colors hover:bg-zinc-300">
+            {equation}
+          </pre>
+        </output>
       </div>
     </div>
   )
