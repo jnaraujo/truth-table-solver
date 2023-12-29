@@ -19,20 +19,7 @@ export function Component() {
   }, [variablesNames])
 
   useEffect(() => {
-    const generatedTable = generateTruthTable(inputVariables.length)
-
-    const inputList: string[][] = []
-    for (const [key, value] of table) {
-      inputList.push([key, value || "0"])
-    }
-
-    setOutputsFor(inputList, generatedTable)
-
-    const { dontCares, minterms } = getDataFromTruthTable(generatedTable)
-
-    const p = new PSolver(minterms, dontCares, inputVariables)
-
-    setEquation(p.solve())
+    setEquation(handleSolveEquation(inputVariables, table))
   }, [inputVariables, table])
 
   return (
@@ -63,4 +50,21 @@ export function Component() {
       <Table inputVariables={inputVariables} />
     </section>
   )
+}
+
+function handleSolveEquation(inputVariables: string[], table: string[][]) {
+  const generatedTable = generateTruthTable(inputVariables.length)
+
+  const inputList: string[][] = []
+  for (const [key, value] of table) {
+    inputList.push([key, value || "0"])
+  }
+
+  setOutputsFor(inputList, generatedTable)
+
+  const { dontCares, minterms } = getDataFromTruthTable(generatedTable)
+
+  const p = new PSolver(minterms, dontCares, inputVariables)
+
+  return p.solve()
 }
