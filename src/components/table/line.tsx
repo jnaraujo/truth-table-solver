@@ -1,4 +1,5 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
+import { useMemo } from "react"
 import Input from "./input"
 import { cn } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
@@ -11,12 +12,12 @@ interface Props {
 export default function Line({ lineIndex }: Props) {
   const removeIndex = useTruthTableStore((s) => s.removeIndex)
   const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
-  const { inputs, output } = useTruthTableStore((s) => {
-    return {
-      inputs: s.table[lineIndex][0].split(""),
-      output: s.table[lineIndex][1],
-    }
-  })
+
+  const line = useTruthTableStore((s) => s.table[lineIndex])
+
+  const inputs = useMemo(() => line[0].split(""), [line])
+  const output = useMemo(() => line[1], [line])
+
   const isKeyDuplicated = useTruthTableStore((s) =>
     s.isKeyDuplicated(s.table[lineIndex][0]),
   )
@@ -36,7 +37,7 @@ export default function Line({ lineIndex }: Props) {
             <Input
               index={index}
               value={value as "#" | "0" | "1"}
-              onChange={(value, index) => {
+              onChange={(value: string, index: number) => {
                 const newInputs = [...inputs]
                 newInputs[index] = value
                 updateValueFromIndex(lineIndex, [newInputs.join(""), output])
@@ -50,8 +51,8 @@ export default function Line({ lineIndex }: Props) {
           <Input
             index={inputs.length}
             value={output as "#" | "0" | "1"}
-            onChange={(newOutput) => {
-              updateValueFromIndex(lineIndex, [inputs.join(""), newOutput])
+            onChange={(value: string) => {
+              updateValueFromIndex(lineIndex, [inputs.join(""), value])
             }}
             ariaLabel={`Change output of line ${lineIndex}`}
           />
