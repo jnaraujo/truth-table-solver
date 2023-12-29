@@ -1,16 +1,18 @@
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import Worker from "../workers/tsolver-worker?worker"
 
 export default function useTableSolver() {
   const worker = useRef<Worker | null>(null)
 
   useEffect(() => {
-    if (worker.current) return
-
     worker.current = new Worker()
+
+    return () => {
+      worker.current?.terminate()
+    }
   }, [])
 
-  function solve(inputVariables: string[], table: string[][]) {
+  const solve = useCallback((inputVariables: string[], table: string[][]) => {
     return new Promise<{
       equation: string
     }>((resolve) => {
@@ -27,7 +29,9 @@ export default function useTableSolver() {
         })
       })
     })
-  }
+  }, [])
 
-  return { solve }
+  return {
+    solve,
+  }
 }
