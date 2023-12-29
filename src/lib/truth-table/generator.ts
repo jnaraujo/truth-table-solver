@@ -36,28 +36,30 @@ export function setOutputsFor(inputs: string[][], table: Map<string, string>) {
       }
     }
   }
+}
 
+export function getDataFromTruthTable(table: Map<string, string>) {
   let output = ""
   for (const key of table.keys()) {
     output += table.get(key)
   }
 
-  const positionsWithOne = []
+  const minterms = []
   for (let i = 0; i < output.length; i++) {
     if (output[i] === "1") {
-      positionsWithOne.push(i)
+      minterms.push(i)
     }
   }
 
-  const positionsWithDontCare = []
+  const dontCares = []
   for (let i = 0; i < output.length; i++) {
     if (output[i] === "#") {
-      positionsWithDontCare.push(i)
+      dontCares.push(i)
     }
   }
 
   return {
-    positionsWithOne,
-    positionsWithDontCare,
+    minterms,
+    dontCares,
   }
 }
