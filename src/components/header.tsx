@@ -26,7 +26,9 @@ export default function Header() {
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="group flex justify-start gap-2 hover:cursor-pointer active:cursor-default">
-                <p className="shrink-0 text-zinc-500">Variáveis de entrada: </p>
+                <p className="shrink-0 text-sm text-zinc-500">
+                  Variáveis de entrada:{" "}
+                </p>
                 <p className="line-clamp-2 flex rounded-md bg-zinc-200 px-2 font-mono text-sm leading-6 transition-colors group-hover:bg-zinc-300">
                   {variables.join(", ")}
                 </p>
@@ -50,7 +52,7 @@ export default function Header() {
               })
             }}
           >
-            <p className="shrink-0 text-zinc-500">Equação de Saída: </p>
+            <p className="shrink-0 text-sm text-zinc-500">Equação de Saída: </p>
             <p className="line-clamp-2 rounded-md bg-zinc-200 px-2 font-mono text-sm leading-6 transition-colors group-hover:bg-zinc-300">
               {equation}
             </p>
