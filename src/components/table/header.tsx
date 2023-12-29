@@ -9,11 +9,11 @@ export default function Header() {
     <header className="flex justify-center gap-4 border-b border-zinc-300 px-1 py-1">
       {variables.map((item, index) => (
         <Cell key={item + index}>
-          <p className="text-sm text-zinc-500">{item}</p>
+          <p className="text-sm font-medium text-zinc-500">{item}</p>
         </Cell>
       ))}
       <Cell>
-        <p className="text-sm text-zinc-500">Saída</p>
+        <p className="text-sm font-medium text-zinc-500">Saída</p>
       </Cell>
 
       <Cell>
