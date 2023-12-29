@@ -32,8 +32,8 @@ export default function Header() {
                 className="group flex items-center gap-2 hover:cursor-pointer active:cursor-default"
                 onClick={() => {}}
               >
-                Variávels de entrada:{" "}
-                <p className="rounded-md bg-zinc-200 px-2 transition-colors group-hover:bg-zinc-300">
+                Variáveis de entrada:{" "}
+                <p className="rounded-md bg-zinc-200 px-2 font-mono transition-colors group-hover:bg-zinc-300">
                   {variables.join(", ")}
                 </p>
               </div>
