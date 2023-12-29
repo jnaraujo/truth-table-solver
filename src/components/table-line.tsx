@@ -11,8 +11,10 @@ interface Props {
 export default function TableLine({ lineIndex }: Props) {
   const removeIndex = useTruthTableStore((s) => s.removeIndex)
   const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
-  const isKeyDuplicated = useTruthTableStore((s) => s.isKeyDuplicated)
   const line = useTruthTableStore((s) => s.table[lineIndex])
+  const isKeyDuplicated = useTruthTableStore((s) =>
+    s.isKeyDuplicated(s.table[lineIndex][0]),
+  )
 
   const inputs = useMemo(() => {
     return line[0].split("")
@@ -41,7 +43,7 @@ export default function TableLine({ lineIndex }: Props) {
   return (
     <div
       className={cn("group flex gap-8 rounded-sm px-1", {
-        "bg-red-200": isKeyDuplicated(line[0]),
+        "bg-red-100": isKeyDuplicated,
       })}
     >
       <div className="flex gap-2">

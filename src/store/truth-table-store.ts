@@ -61,9 +61,8 @@ export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
     let founded = false
 
     for (const item of get().table) {
-      if (founded) return true
-
       if (item[0] === key) {
+        if (founded) return true
         founded = true
       }
     }
