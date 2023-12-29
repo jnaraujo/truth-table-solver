@@ -23,32 +23,57 @@ export function Component() {
   }, [inputVariables, table])
 
   return (
-    <section className="m-4 flex flex-col gap-10">
-      <div className="flex gap-12">
-        <form className="flex gap-2">
-          <label htmlFor="inputVariables">Variávels de entrada:</label>
-          <input
-            type="text"
-            className="border border-zinc-600"
-            id="inputVariables"
-            value={variablesNames}
-            onChange={(e) => {
-              const value = e.target.value
-              if (value.split(",").length !== inputVariables.length) {
-                clear()
-              }
-              setVariablesNames(value)
-            }}
-          />
-        </form>
+    <>
+      <section className="m-4 flex flex-col gap-10">
+        <div className="flex gap-12">
+          <form className="flex gap-2">
+            <label htmlFor="inputVariables">Variávels de entrada:</label>
+            <input
+              type="text"
+              className="border border-zinc-600"
+              id="inputVariables"
+              value={variablesNames}
+              onChange={(e) => {
+                const value = e.target.value
+                if (value.split(",").length !== inputVariables.length) {
+                  clear()
+                }
+                setVariablesNames(value)
+              }}
+            />
+          </form>
 
-        <div className="flex gap-2 bg-zinc-200 px-2">
-          Equação: <output>{equation}</output>
+          <div className="flex gap-2 bg-zinc-200 px-2">
+            Equação: <output>{equation}</output>
+          </div>
         </div>
-      </div>
 
-      <Table inputVariables={inputVariables} />
-    </section>
+        <Table inputVariables={inputVariables} />
+      </section>
+
+      <footer className="flex h-16 items-center justify-center">
+        <p className="text-center">
+          <a
+            href="https://github.com/jnaraujo/truth-table-solver"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500"
+          >
+            Código fonte do projeto.
+          </a>
+          <br />O código do algoritmo de Petrick foi baseado no código de{" "}
+          <a
+            href="https://github.com/charlie-coleman/main-website/blob/master/experiments/kmap/ts/petrick.ts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500"
+          >
+            Charlie Coleman
+          </a>
+          .
+        </p>
+      </footer>
+    </>
   )
 }
 
