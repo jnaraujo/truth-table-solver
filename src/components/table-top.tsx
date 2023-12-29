@@ -8,34 +8,40 @@ import { useTruthTableStore } from "@/store/truth-table-store"
 import { useEffect, useState } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 import { toast } from "sonner"
+import UpdateVariablesDialog from "./update-variables-dialog"
 
 export default function TableTop() {
   const [equation, setEquation] = useState<string>("")
 
-  const { table, clear, variables, setVariables } = useTruthTableStore()
+  const { table, variables } = useTruthTableStore((s) => ({
+    table: s.table,
+    variables: s.variables,
+  }))
 
   useEffect(() => {
     setEquation(handleSolveEquation(variables, table))
   }, [variables, table])
 
   return (
-    <div className="flex gap-12">
-      <form className="flex gap-2">
-        <label htmlFor="inputVariables">Variávels de entrada:</label>
-        <input
-          type="text"
-          className="border border-zinc-600"
-          id="inputVariables"
-          value={variables}
-          onChange={(e) => {
-            const value = e.target.value
-            if (value.split(",").length !== variables.length) {
-              clear()
-            }
-            setVariables(value.split(",").map((item) => item.trim()))
-          }}
-        />
-      </form>
+    <div className="flex w-full justify-between gap-12">
+      <div className="flex">
+        <UpdateVariablesDialog>
+          <Tooltip>
+            <TooltipTrigger>
+              <div
+                className="group flex gap-2 hover:cursor-pointer active:cursor-default"
+                onClick={() => {}}
+              >
+                Variávels de entrada:{" "}
+                <p className="rounded-md bg-zinc-200 px-2 transition-colors group-hover:bg-zinc-300">
+                  {variables}
+                </p>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>Clique para editar as variáveis</TooltipContent>
+          </Tooltip>
+        </UpdateVariablesDialog>
+      </div>
 
       <Tooltip>
         <TooltipTrigger>
