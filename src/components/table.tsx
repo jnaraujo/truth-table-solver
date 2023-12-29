@@ -1,11 +1,18 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
 import TableLine from "./table-line"
 import { useMemo } from "react"
+import { CopyMinus, Plus } from "lucide-react"
 
 export default function Table() {
-  const tableLength = useTruthTableStore((s) => s.table.length)
-  const variables = useTruthTableStore((s) => s.variables)
-  const addValue = useTruthTableStore((s) => s.addValue)
+  const { addValue, tableLength, variables, removeDuplicateKeys } =
+    useTruthTableStore((s) => {
+      return {
+        addValue: s.addValue,
+        tableLength: s.table.length,
+        variables: s.variables,
+        removeDuplicateKeys: s.removeDuplicateKeys,
+      }
+    })
 
   const indexTable = useMemo(() => {
     return Array.from({
@@ -37,15 +44,25 @@ export default function Table() {
           <TableLine key={index} lineIndex={index} />
         ))}
 
-        <div>
+        <div className="flex justify-between">
           <button
             type="button"
-            className="rounded bg-green-500 px-2 py-1 text-green-50"
+            className="flex gap-1 rounded bg-green-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-green-600"
             onClick={() => {
               addValue(["0".repeat(variables.length), "0"])
             }}
           >
+            <Plus />
             Adicionar linha
+          </button>
+
+          <button
+            type="button"
+            className="flex gap-2 rounded bg-red-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-red-600"
+            onClick={removeDuplicateKeys}
+          >
+            <CopyMinus />
+            Remover entradas duplicadas
           </button>
         </div>
       </div>

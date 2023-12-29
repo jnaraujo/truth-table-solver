@@ -5,6 +5,7 @@ interface TruthTableStore {
   variables: string[]
 
   isKeyDuplicated(key: string): boolean
+  removeDuplicateKeys(): void
   addValue(value: [string, string]): void
   updateValueFromIndex(index: number, value: [string, string]): void
   removeIndex(index: number): void
@@ -21,6 +22,18 @@ export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
     set((state) => {
       const newArr = [...state.table, value]
       return { table: newArr }
+    })
+  },
+  removeDuplicateKeys() {
+    set((state) => {
+      const newArr = [...state.table]
+      const newMap = new Map<string, string>()
+
+      for (const item of newArr) {
+        newMap.set(item[0], item[1])
+      }
+
+      return { table: [...newMap] }
     })
   },
   updateValueFromIndex(index: number, value: [string, string]) {

@@ -4,12 +4,14 @@ import TableTop from "@/components/table-top"
 export function Component() {
   return (
     <>
-      <section className="mx-auto flex w-fit min-w-[50vw] flex-col items-center gap-10 rounded-md bg-zinc-100 p-4">
-        <TableTop />
-        <Table />
+      <section className="mx-auto mt-10 w-fit min-w-[50vw] p-4">
+        <div className="flex flex-col items-center gap-10">
+          <TableTop />
+          <Table />
+        </div>
       </section>
 
-      <footer className="flex h-16 items-center justify-center">
+      <footer className="mt-auto flex h-16 items-center justify-center">
         <p className="text-center">
           <a
             href="https://github.com/jnaraujo/truth-table-solver"
