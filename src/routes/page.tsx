@@ -9,16 +9,14 @@ import { useTruthTableStore } from "@/store/truth-table"
 import { useEffect, useMemo, useState } from "react"
 
 export function Component() {
-  const [inputVariablesNames, setInputVariablesNames] =
-    useState<string>("A, B, C, D")
+  const [variablesNames, setVariablesNames] = useState<string>("A, B, C, D")
   const [equation, setEquation] = useState<string>("")
 
-  const { addValue, table, clear, removeIndex, updateValueFromIndex } =
-    useTruthTableStore()
+  const { addValue, table, clear } = useTruthTableStore()
 
   const inputVariables = useMemo(() => {
-    return inputVariablesNames.split(",").map((item) => item.trim())
-  }, [inputVariablesNames])
+    return variablesNames.split(",").map((item) => item.trim())
+  }, [variablesNames])
 
   useEffect(() => {
     const generatedTable = generateTruthTable(inputVariables.length)
@@ -46,13 +44,13 @@ export function Component() {
             type="text"
             className="border border-zinc-600"
             id="inputVariables"
-            value={inputVariablesNames}
+            value={variablesNames}
             onChange={(e) => {
               const value = e.target.value
               if (value.split(",").length !== inputVariables.length) {
                 clear()
               }
-              setInputVariablesNames(value)
+              setVariablesNames(value)
             }}
           />
         </form>
@@ -88,12 +86,7 @@ export function Component() {
               key={input + index}
               inputs={input.split("")}
               output={output || "0"}
-              onChange={(inputs, output) => {
-                updateValueFromIndex(index, [inputs.join(""), output])
-              }}
-              remove={() => {
-                removeIndex(index)
-              }}
+              lineIndex={index}
             />
           ))}
 
@@ -118,18 +111,17 @@ interface TableLineProps {
   inputs: string[]
   output: string
 
-  onChange?: (inputs: string[], output: string) => void
-  remove: () => void
+  lineIndex: number
 }
 
 function TableLine({
   inputs: initialInputs,
   output: initialOutput,
-  onChange,
-  remove,
+  lineIndex,
 }: TableLineProps) {
   const [inputs, setInputs] = useState<string[]>(initialInputs)
   const [output, setOutput] = useState<string>(initialOutput)
+  const { removeIndex, updateValueFromIndex } = useTruthTableStore()
 
   return (
     <div className="flex gap-6">
@@ -144,7 +136,7 @@ function TableLine({
               onChange={(value) => {
                 inputs[index] = value
                 setInputs([...inputs])
-                onChange?.(inputs, output)
+                updateValueFromIndex(lineIndex, [inputs.join(""), output])
               }}
             />
           </div>
@@ -157,7 +149,7 @@ function TableLine({
             value={output as "#" | "0" | "1"}
             onChange={(value) => {
               setOutput(value)
-              onChange?.(inputs, value)
+              updateValueFromIndex(lineIndex, [inputs.join(""), output])
             }}
           />
         </div>
@@ -167,7 +159,9 @@ function TableLine({
         <button
           type="button"
           className="rounded bg-red-500 px-2 py-1 text-red-50"
-          onClick={remove}
+          onClick={() => {
+            removeIndex(lineIndex)
+          }}
         >
           Remover
         </button>
@@ -177,12 +171,10 @@ function TableLine({
 }
 
 interface TableInputProps {
-  value?: "#" | "0" | "1"
-  onChange?: (value: string) => void
+  value: "#" | "0" | "1"
+  onChange: (value: string) => void
 }
 function TableInput({ value, onChange }: TableInputProps) {
-  const [state, setState] = useState<"#" | "0" | "1">(value || "0")
-
   const colors = {
     "#": "bg-orange-200",
     "0": "bg-zinc-300",
@@ -199,16 +191,12 @@ function TableInput({ value, onChange }: TableInputProps) {
       return value
     }
 
-    setState((prev) => {
-      const next = nextValue(prev)
-      onChange?.(next)
-      return next
-    })
+    onChange?.(nextValue(value))
   }
 
   return (
-    <button className={cn("w-full", colors[state])} onClick={nextState}>
-      {state}
+    <button className={cn("w-full", colors[value])} onClick={nextState}>
+      {value}
     </button>
   )
 }
