@@ -6,18 +6,18 @@ export default function Header() {
   const variables = useTruthTableStore((s) => s.variables)
 
   return (
-    <header className="flex justify-center gap-4 border-b border-zinc-600 px-1 py-1">
+    <header className="flex justify-center gap-4 border-b border-zinc-300 px-1 py-1">
       {variables.map((item, index) => (
         <Cell key={item + index}>
-          <p>{item}</p>
+          <p className="text-sm text-zinc-500">{item}</p>
         </Cell>
       ))}
       <Cell>
-        <p>Saída</p>
+        <p className="text-sm text-zinc-500">Saída</p>
       </Cell>
 
       <Cell>
-        <Wrench size={18} className="text-zinc-500" />
+        <Wrench size={16} className="text-zinc-500" />
       </Cell>
     </header>
   )
