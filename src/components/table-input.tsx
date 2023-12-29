@@ -31,7 +31,7 @@ export default function TableInput({
     <button
       className={cn("w-full", colors[value])}
       onClick={nextState}
-      tabIndex={0}
+      aria-label="Change value"
     >
       {value}
     </button>
