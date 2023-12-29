@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
 import Cell from "./cell"
 import { toast } from "sonner"
+import ConfirmDeleteLineDialog from "../confirm-delete-line"
 
 interface Props {
   lineIndex: number
@@ -60,10 +61,9 @@ export default function Line({ lineIndex }: Props) {
       </Cell>
 
       <Cell>
-        <button
-          type="button"
-          className="rounded px-2 py-1 text-red-500 transition-opacity group-hover:opacity-100 md:opacity-0"
-          onClick={() => {
+        <ConfirmDeleteLineDialog
+          asChild
+          onConfirm={() => {
             if (tableLength <= 1) {
               toast.error("Não é possível remover a última linha.", {
                 className: "!text-red-600",
@@ -75,10 +75,15 @@ export default function Line({ lineIndex }: Props) {
 
             removeIndex(lineIndex)
           }}
-          aria-label="Remove line"
         >
-          <Trash2 size={20} />
-        </button>
+          <button
+            type="button"
+            className="rounded px-2 py-1 text-red-500 transition-opacity group-hover:opacity-100 md:opacity-0"
+            aria-label="Remove line"
+          >
+            <Trash2 size={20} />
+          </button>
+        </ConfirmDeleteLineDialog>
       </Cell>
     </div>
   )
