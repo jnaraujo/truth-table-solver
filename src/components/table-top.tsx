@@ -34,7 +34,7 @@ export default function TableTop() {
               >
                 Variávels de entrada:{" "}
                 <p className="rounded-md bg-zinc-200 px-2 transition-colors group-hover:bg-zinc-300">
-                  {variables}
+                  {variables.join(", ")}
                 </p>
               </div>
             </TooltipTrigger>
