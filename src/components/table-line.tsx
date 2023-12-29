@@ -1,39 +1,49 @@
-import { useTruthTableStore } from "@/store/truth-table"
-import { useState } from "react"
+import { useTruthTableStore } from "@/store/truth-table-store"
+import { useCallback, useMemo } from "react"
 import TableInput from "./table-input"
 
 interface Props {
-  inputs: string[]
-  output: string
-
   lineIndex: number
 }
 
-export default function TableLine({
-  inputs: initialInputs,
-  output: initialOutput,
-  lineIndex,
-}: Props) {
-  const [inputs, setInputs] = useState<string[]>(initialInputs)
-  const [output, setOutput] = useState<string>(initialOutput)
-  const { removeIndex, updateValueFromIndex } = useTruthTableStore()
+export default function TableLine({ lineIndex }: Props) {
+  const removeIndex = useTruthTableStore((s) => s.removeIndex)
+  const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
+  const line = useTruthTableStore((s) => s.table[lineIndex])
+
+  const inputs = useMemo(() => {
+    return line[0].split("")
+  }, [line])
+
+  const output = useMemo(() => {
+    return line[1]
+  }, [line])
+
+  const handleOnInputChange = useCallback(
+    (value: string, index: number) => {
+      const newInputs = [...inputs]
+      newInputs[index] = value
+      updateValueFromIndex(lineIndex, [newInputs.join(""), output])
+    },
+    [inputs, lineIndex, output, updateValueFromIndex],
+  )
+
+  const handleOnOutputChange = useCallback(
+    (newOutput: string) => {
+      updateValueFromIndex(lineIndex, [inputs.join(""), newOutput])
+    },
+    [inputs, lineIndex, updateValueFromIndex],
+  )
 
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-8">
       <div className="flex gap-2">
         {inputs.map((value, index) => (
-          <div
-            key={value + index}
-            className="flex w-28 items-center justify-center"
-          >
+          <div key={index} className="flex w-28 items-center justify-center">
             <TableInput
+              index={index}
               value={value as "#" | "0" | "1"}
-              onChange={(value) => {
-                const newInputs = [...inputs]
-                newInputs[index] = value
-                setInputs(newInputs)
-                updateValueFromIndex(lineIndex, [newInputs.join(""), output])
-              }}
+              onChange={handleOnInputChange}
             />
           </div>
         ))}
@@ -42,11 +52,9 @@ export default function TableLine({
       <div className="flex gap-2">
         <div className="flex w-28 items-center justify-center">
           <TableInput
+            index={0}
             value={output as "#" | "0" | "1"}
-            onChange={(newOutput) => {
-              setOutput(newOutput)
-              updateValueFromIndex(lineIndex, [inputs.join(""), newOutput])
-            }}
+            onChange={handleOnOutputChange}
           />
         </div>
       </div>

@@ -2,6 +2,7 @@ import { create } from "zustand"
 
 interface TruthTableStore {
   table: [string, string][]
+  variables: string[]
 
   addValue(value: [string, string]): void
   updateValueFromIndex(index: number, value: [string, string]): void
@@ -9,10 +10,13 @@ interface TruthTableStore {
   removeKey(key: string): void
   removeIndex(index: number): void
   clear(): void
+
+  setVariables(variables: string[]): void
 }
 
 export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
   table: [["0000", "0"]],
+  variables: ["A", "B", "C", "D"],
 
   addValue(value: [string, string]) {
     set((state) => {
@@ -50,6 +54,12 @@ export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
       const newArr = [...state.table]
       newArr.splice(index, 1)
       return { table: newArr }
+    })
+  },
+
+  setVariables(variables: string[]) {
+    set(() => {
+      return { variables }
     })
   },
 }))
