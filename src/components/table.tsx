@@ -9,7 +9,7 @@ export default function Table({ inputVariables }: Props) {
   const { table, addValue } = useTruthTableStore()
 
   return (
-    <section className="flex flex-col gap-2 bg-zinc-200">
+    <section className="flex flex-col gap-2">
       <div className="flex gap-6 border-b border-zinc-600">
         <div className="flex gap-2">
           {inputVariables.map((item, index) => (
@@ -24,7 +24,7 @@ export default function Table({ inputVariables }: Props) {
 
         <div className="flex gap-2">
           <div className="flex w-28 items-center justify-center bg-zinc-500 text-zinc-50">
-            S
+            Saída
           </div>
         </div>
       </div>
