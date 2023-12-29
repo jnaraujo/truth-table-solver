@@ -1,23 +1,19 @@
 import { cn } from "@/lib/utils"
 
-interface TableInputProps {
+interface Props {
   value: "#" | "0" | "1"
   index: number
   onChange: (value: string, index: number) => void
   ariaLabel?: string
 }
-export default function TableInput({
-  value,
-  onChange,
-  index,
-  ariaLabel,
-}: TableInputProps) {
-  const colors = {
-    "#": "bg-orange-100",
-    "0": "bg-zinc-100",
-    "1": "bg-green-100",
-  }
 
+const colors = {
+  "#": "bg-orange-100",
+  "0": "bg-zinc-100",
+  "1": "bg-green-100",
+}
+
+export default function Input({ value, onChange, index, ariaLabel }: Props) {
   function nextState(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     function nextValue(value: "#" | "0" | "1") {

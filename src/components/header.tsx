@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 import { toast } from "sonner"
 import UpdateVariablesDialog from "./update-variables-dialog"
 
-export default function TableTop() {
+export default function Header() {
   const [equation, setEquation] = useState<string>("")
 
   const { table, variables } = useTruthTableStore((s) => ({
@@ -23,7 +23,7 @@ export default function TableTop() {
   }, [variables, table])
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <header className="flex w-full flex-col gap-4">
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>
@@ -58,7 +58,7 @@ export default function TableTop() {
           >
             Equação de Saída:{" "}
             <output>
-              <p className="font-mono line-clamp-2 max-w-[50vw] break-all rounded-md bg-zinc-200 px-2 text-left transition-colors group-hover/equation:bg-zinc-300 md:max-w-[700px]">
+              <p className="line-clamp-2 max-w-[50vw] break-all rounded-md bg-zinc-200 px-2 text-left font-mono transition-colors group-hover/equation:bg-zinc-300 md:max-w-[700px]">
                 {equation}
               </p>
             </output>
@@ -66,7 +66,7 @@ export default function TableTop() {
         </TooltipTrigger>
         <TooltipContent>Clique para copiar</TooltipContent>
       </Tooltip>
-    </div>
+    </header>
   )
 }
 

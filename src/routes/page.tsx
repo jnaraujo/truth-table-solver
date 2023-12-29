@@ -1,15 +1,15 @@
+import Header from "@/components/header"
 import Table from "@/components/table"
-import TableTop from "@/components/table-top"
 
 export function Component() {
   return (
     <>
-      <section className="mx-auto mt-10 w-fit min-w-[50vw] p-4">
-        <div className="flex max-w-screen-xl flex-col items-center gap-10">
-          <TableTop />
+      <div className="mx-auto mt-10 flex w-fit min-w-[50vw] max-w-screen-xl flex-col items-center gap-8 p-4">
+        <Header />
+        <main className="w-full">
           <Table />
-        </div>
-      </section>
+        </main>
+      </div>
 
       <footer className="mt-auto flex h-16 items-center justify-center">
         <p className="text-center">
