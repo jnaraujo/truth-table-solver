@@ -3,6 +3,7 @@ import TableLine from "./table-line"
 import { useMemo } from "react"
 import { CopyMinus, Plus } from "lucide-react"
 import ConfirmDeleteDuplicatesDialog from "./confirm-delete-duplicates-dialog"
+import { Button } from "./ui/button"
 
 export default function Table() {
   const { addValue, tableLength, variables, removeDuplicateKeys } =
@@ -31,25 +32,21 @@ export default function Table() {
         ))}
 
         <div className="mt-4 flex w-full justify-between">
-          <button
-            type="button"
-            className="flex gap-1 rounded bg-green-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-green-600"
+          <Button
+            className="flex gap-2"
             onClick={() => {
               addValue(["0".repeat(variables.length), "0"])
             }}
           >
-            <Plus />
+            <Plus size={22} />
             Adicionar linha
-          </button>
+          </Button>
 
           <ConfirmDeleteDuplicatesDialog onConfirm={removeDuplicateKeys}>
-            <button
-              type="button"
-              className="flex gap-2 rounded bg-red-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-red-600"
-            >
-              <CopyMinus />
+            <Button variant="destructive" className="flex gap-2">
+              <CopyMinus size={22} />
               Remover entradas duplicadas
-            </button>
+            </Button>
           </ConfirmDeleteDuplicatesDialog>
         </div>
       </div>
