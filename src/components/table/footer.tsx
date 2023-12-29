@@ -26,7 +26,7 @@ export default function Footer() {
         Adicionar linha
       </Button>
 
-      <ConfirmDeleteDuplicatesDialog onConfirm={removeDuplicateKeys}>
+      <ConfirmDeleteDuplicatesDialog onConfirm={removeDuplicateKeys} asChild>
         <Button variant="destructive" className="flex w-full gap-2 md:w-fit">
           <CopyMinus size={22} />
           Remover entradas duplicadas

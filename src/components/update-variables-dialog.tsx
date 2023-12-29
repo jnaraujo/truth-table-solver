@@ -16,9 +16,10 @@ import { useState } from "react"
 
 interface Props {
   children: React.ReactNode
+  asChild?: boolean
 }
 
-export default function UpdateVariablesDialog({ children }: Props) {
+export default function UpdateVariablesDialog({ children, asChild }: Props) {
   const { clear, setVariables, variables } = useTruthTableStore((s) => ({
     clear: s.clear,
     setVariables: s.setVariables,
@@ -37,7 +38,7 @@ export default function UpdateVariablesDialog({ children }: Props) {
   const hasChanged = value !== variables.join(", ")
   return (
     <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Editar variáveis</DialogTitle>

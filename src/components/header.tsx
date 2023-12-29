@@ -27,7 +27,7 @@ export default function Header() {
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <div
                 className="group flex items-center gap-2 hover:cursor-pointer active:cursor-default"
                 onClick={() => {}}

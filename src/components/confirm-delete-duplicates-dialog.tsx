@@ -13,16 +13,18 @@ import {
 interface Props {
   children: React.ReactNode
 
+  asChild?: boolean
   onConfirm?(): void
 }
 
 export default function ConfirmDeleteDuplicatesDialog({
   children,
   onConfirm,
+  asChild,
 }: Props) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>{children}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild={asChild}>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
