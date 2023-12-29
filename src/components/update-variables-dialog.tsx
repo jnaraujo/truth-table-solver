@@ -57,7 +57,7 @@ export default function UpdateVariablesDialog({ children }: Props) {
         </div>
 
         <DialogFooter>
-          <DialogClose disabled={!hasChanged}>
+          <DialogClose asChild>
             <Button
               type="submit"
               onClick={handleUpdateVariables}
