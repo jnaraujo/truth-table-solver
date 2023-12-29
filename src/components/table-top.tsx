@@ -23,13 +23,13 @@ export default function TableTop() {
   }, [variables, table])
 
   return (
-    <div className="flex w-full justify-between gap-12">
+    <div className="flex w-full flex-col gap-4">
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>
             <TooltipTrigger>
               <div
-                className="group flex gap-2 hover:cursor-pointer active:cursor-default"
+                className="group flex items-center gap-2 hover:cursor-pointer active:cursor-default"
                 onClick={() => {}}
               >
                 Variávels de entrada:{" "}
@@ -46,7 +46,7 @@ export default function TableTop() {
       <Tooltip>
         <TooltipTrigger>
           <div
-            className="group/equation flex gap-2 hover:cursor-pointer active:cursor-default"
+            className="group/equation flex items-center gap-2 hover:cursor-pointer active:cursor-default"
             onClick={() => {
               navigator.clipboard.writeText(equation)
               toast.success("Equação copiada para a área de transferência.", {
@@ -58,9 +58,9 @@ export default function TableTop() {
           >
             Equação de Saída:{" "}
             <output>
-              <pre className="rounded-md bg-zinc-200 px-2 transition-colors group-hover/equation:bg-zinc-300">
+              <p className="font-mono line-clamp-2 max-w-[50vw] break-all rounded-md bg-zinc-200 px-2 text-left transition-colors group-hover/equation:bg-zinc-300 md:max-w-[700px]">
                 {equation}
-              </pre>
+              </p>
             </output>
           </div>
         </TooltipTrigger>

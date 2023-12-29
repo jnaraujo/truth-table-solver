@@ -5,7 +5,7 @@ export function Component() {
   return (
     <>
       <section className="mx-auto mt-10 w-fit min-w-[50vw] p-4">
-        <div className="flex flex-col items-center gap-10">
+        <div className="flex max-w-screen-xl flex-col items-center gap-10">
           <TableTop />
           <Table />
         </div>

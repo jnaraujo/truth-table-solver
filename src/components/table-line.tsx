@@ -43,7 +43,7 @@ export default function TableLine({ lineIndex }: Props) {
   return (
     <div
       className={cn(
-        "group relative flex h-8 w-full justify-center gap-8 rounded-md px-1",
+        "group flex h-8 w-full justify-center gap-8 rounded-md px-1",
         {
           "bg-red-100": isKeyDuplicated,
         },
@@ -52,7 +52,10 @@ export default function TableLine({ lineIndex }: Props) {
       <div className="flex gap-8">
         <div className="flex gap-2">
           {inputs.map((value, index) => (
-            <div key={index} className="flex w-28 items-center justify-center">
+            <div
+              key={index}
+              className="flex w-14 items-center justify-center md:w-20"
+            >
               <TableInput
                 index={index}
                 value={value as "#" | "0" | "1"}
@@ -63,7 +66,7 @@ export default function TableLine({ lineIndex }: Props) {
         </div>
 
         <div className="flex gap-2">
-          <div className="flex w-28 items-center justify-center">
+          <div className="flex w-14 items-center justify-center md:w-20">
             <TableInput
               index={0}
               value={output as "#" | "0" | "1"}
@@ -73,15 +76,17 @@ export default function TableLine({ lineIndex }: Props) {
         </div>
       </div>
 
-      <button
-        type="button"
-        className="absolute right-0 top-1/2 w-10 translate-y-[-50%] rounded px-2 py-1 text-red-500 opacity-0 transition-opacity group-hover:opacity-100"
-        onClick={() => {
-          removeIndex(lineIndex)
-        }}
-      >
-        <Trash2 size={22} />
-      </button>
+      <div className="flex w-14 items-center justify-center md:w-20">
+        <button
+          type="button"
+          className="rounded px-2 py-1 text-red-500 transition-opacity group-hover:opacity-100 md:opacity-0"
+          onClick={() => {
+            removeIndex(lineIndex)
+          }}
+        >
+          <Trash2 size={22} />
+        </button>
+      </div>
     </div>
   )
 }

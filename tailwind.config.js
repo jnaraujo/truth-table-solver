@@ -9,6 +9,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ["Inter", fontFamily.sans],
+      mono: [fontFamily.mono],
     },
     container: {
       center: true,
