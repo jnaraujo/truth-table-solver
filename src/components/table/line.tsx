@@ -25,7 +25,7 @@ export default function Line({ lineIndex }: Props) {
   return (
     <div
       className={cn(
-        "group flex h-8 w-full justify-center gap-4 rounded-md px-1",
+        "group flex h-6 w-full justify-center gap-4 rounded-md px-1",
         {
           "bg-red-100": isKeyDuplicated,
         },

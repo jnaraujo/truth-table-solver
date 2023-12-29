@@ -20,17 +20,14 @@ export default function Header() {
   }, [variables, table, solve])
 
   return (
-    <header className="flex w-full flex-col gap-4">
+    <header className="flex h-20 w-full flex-col gap-4">
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div
-                className="group flex items-center gap-2 hover:cursor-pointer active:cursor-default"
-                onClick={() => {}}
-              >
-                Variáveis de entrada:{" "}
-                <p className="rounded-md bg-zinc-200 px-2 font-mono transition-colors group-hover:bg-zinc-300">
+              <div className="group flex justify-start gap-2 hover:cursor-pointer active:cursor-default">
+                <p className="shrink-0 text-zinc-500">Variáveis de entrada: </p>
+                <p className="line-clamp-2 flex rounded-md bg-zinc-200 px-2 font-mono text-sm leading-6 transition-colors group-hover:bg-zinc-300">
                   {variables.join(", ")}
                 </p>
               </div>
@@ -43,7 +40,7 @@ export default function Header() {
       <Tooltip>
         <TooltipTrigger>
           <div
-            className="group/equation flex items-center gap-2 hover:cursor-pointer active:cursor-default"
+            className="group flex justify-start gap-2 hover:cursor-pointer active:cursor-default"
             onClick={() => {
               navigator.clipboard.writeText(equation)
               toast.success("Equação copiada para a área de transferência.", {
@@ -53,12 +50,10 @@ export default function Header() {
               })
             }}
           >
-            Equação de Saída:{" "}
-            <output>
-              <p className="line-clamp-2 max-w-[50vw] break-all rounded-md bg-zinc-200 px-2 text-left font-mono transition-colors group-hover/equation:bg-zinc-300 md:max-w-[700px]">
-                {equation}
-              </p>
-            </output>
+            <p className="shrink-0 text-zinc-500">Equação de Saída: </p>
+            <p className="line-clamp-2 rounded-md bg-zinc-200 px-2 font-mono text-sm leading-6 transition-colors group-hover:bg-zinc-300">
+              {equation}
+            </p>
           </div>
         </TooltipTrigger>
         <TooltipContent>Clique para copiar</TooltipContent>

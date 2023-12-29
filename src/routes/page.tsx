@@ -4,7 +4,7 @@ import Table from "@/components/table"
 export function Component() {
   return (
     <>
-      <div className="mx-auto mt-10 flex w-fit min-w-[50vw] max-w-screen-xl flex-col items-center gap-8 p-4">
+      <div className="mx-auto mt-10 flex w-full max-w-screen-sm flex-col items-center gap-4 p-4">
         <Header />
         <main className="w-full">
           <Table />

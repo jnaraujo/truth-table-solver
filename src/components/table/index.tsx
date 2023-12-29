@@ -19,7 +19,7 @@ export default function Table() {
         <div className="mx-auto flex w-fit flex-col gap-2 p-2">
           <Header />
 
-          <div className="flex min-h-40 flex-col items-center gap-4">
+          <div className="flex min-h-40 flex-col items-center gap-2">
             {indexTable.map((index) => (
               <Line key={index} lineIndex={index} />
             ))}

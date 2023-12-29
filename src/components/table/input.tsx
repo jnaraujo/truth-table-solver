@@ -8,9 +8,9 @@ interface Props {
 }
 
 const colors = {
-  "#": "bg-orange-100",
-  "0": "bg-zinc-100",
-  "1": "bg-green-100",
+  "#": "text-orange-500",
+  "0": "text-zinc-500",
+  "1": "text-green-500",
 }
 
 export default function Input({ value, onChange, index, ariaLabel }: Props) {
@@ -27,7 +27,7 @@ export default function Input({ value, onChange, index, ariaLabel }: Props) {
 
   return (
     <button
-      className={cn("w-full", colors[value])}
+      className={cn("w-full text-sm", colors[value])}
       onClick={nextState}
       aria-label={ariaLabel}
     >
