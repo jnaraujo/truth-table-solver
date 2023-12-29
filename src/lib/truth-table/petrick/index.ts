@@ -164,14 +164,14 @@ export class Petrick {
   }
 
   public getSOPVhdl(): string {
-    let output: string = this.returnName + " <= "
+    let output: string = ""
 
-    if (this.sopEssentials.length == 0) return output + "0;"
+    if (this.sopEssentials.length == 0) return output + "0"
     else if (
       this.sopEssentials.length == 1 &&
       this.sopEssentials[0].getBinaryRep() == "-".repeat(this.dimension)
     )
-      return output + "1;"
+      return output + "1"
 
     output += "("
     for (const e of this.sopEssentials) {
@@ -185,7 +185,7 @@ export class Petrick {
       }
       output = output.slice(0, -5) + ") or ("
     }
-    output = output.slice(0, -5) + ";"
+    output = output.slice(0, -5)
     return output
   }
 

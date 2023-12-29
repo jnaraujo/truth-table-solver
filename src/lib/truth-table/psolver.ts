@@ -14,6 +14,6 @@ export class PSolver {
 
   public solve() {
     this.petrick.calculateSOPEssentials()
-    return this.petrick.getSOPGeneric()
+    return this.petrick.getSOPVhdl()
   }
 }
