@@ -2,6 +2,7 @@ import { useTruthTableStore } from "@/store/truth-table-store"
 import TableLine from "./table-line"
 import { useMemo } from "react"
 import { CopyMinus, Plus } from "lucide-react"
+import ConfirmDeleteDuplicatesDialog from "./confirm-delete-duplicates-dialog"
 
 export default function Table() {
   const { addValue, tableLength, variables, removeDuplicateKeys } =
@@ -56,14 +57,15 @@ export default function Table() {
             Adicionar linha
           </button>
 
-          <button
-            type="button"
-            className="flex gap-2 rounded bg-red-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-red-600"
-            onClick={removeDuplicateKeys}
-          >
-            <CopyMinus />
-            Remover entradas duplicadas
-          </button>
+          <ConfirmDeleteDuplicatesDialog onConfirm={removeDuplicateKeys}>
+            <button
+              type="button"
+              className="flex gap-2 rounded bg-red-500 px-2 py-1 text-zinc-50 transition-colors hover:bg-red-600"
+            >
+              <CopyMinus />
+              Remover entradas duplicadas
+            </button>
+          </ConfirmDeleteDuplicatesDialog>
         </div>
       </div>
     </section>
