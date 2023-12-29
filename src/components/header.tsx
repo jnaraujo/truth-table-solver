@@ -1,26 +1,23 @@
-import {
-  PSolver,
-  generateTruthTable,
-  getDataFromTruthTable,
-  setOutputsFor,
-} from "@/lib/truth-table"
 import { useTruthTableStore } from "@/store/truth-table-store"
 import { useEffect, useState } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 import { toast } from "sonner"
 import UpdateVariablesDialog from "./update-variables-dialog"
+import useTableSolver from "@/hooks/useTableSolver"
 
 export default function Header() {
   const [equation, setEquation] = useState<string>("")
-
   const { table, variables } = useTruthTableStore((s) => ({
     table: s.table,
     variables: s.variables,
   }))
+  const { solve } = useTableSolver()
 
   useEffect(() => {
-    setEquation(handleSolveEquation(variables, table))
-  }, [variables, table])
+    solve(variables, table).then(({ equation }) => {
+      setEquation(equation)
+    })
+  }, [variables, table, solve])
 
   return (
     <header className="flex w-full flex-col gap-4">
@@ -68,21 +65,4 @@ export default function Header() {
       </Tooltip>
     </header>
   )
-}
-
-function handleSolveEquation(inputVariables: string[], table: string[][]) {
-  const generatedTable = generateTruthTable(inputVariables.length)
-
-  const inputList: string[][] = []
-  for (const [key, value] of table) {
-    inputList.push([key, value || "0"])
-  }
-
-  setOutputsFor(inputList, generatedTable)
-
-  const { dontCares, minterms } = getDataFromTruthTable(generatedTable)
-
-  const p = new PSolver(minterms, dontCares, inputVariables)
-
-  return p.solve()
 }
