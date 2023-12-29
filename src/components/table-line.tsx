@@ -60,6 +60,7 @@ export default function TableLine({ lineIndex }: Props) {
                 index={index}
                 value={value as "#" | "0" | "1"}
                 onChange={handleOnInputChange}
+                ariaLabel={`Change input ${index} of line ${lineIndex}`}
               />
             </div>
           ))}
@@ -68,9 +69,10 @@ export default function TableLine({ lineIndex }: Props) {
         <div className="flex gap-2">
           <div className="flex w-14 items-center justify-center md:w-20">
             <TableInput
-              index={0}
+              index={inputs.length}
               value={output as "#" | "0" | "1"}
               onChange={handleOnOutputChange}
+              ariaLabel={`Change output of line ${lineIndex}`}
             />
           </div>
         </div>
@@ -83,6 +85,7 @@ export default function TableLine({ lineIndex }: Props) {
           onClick={() => {
             removeIndex(lineIndex)
           }}
+          aria-label="Remove line"
         >
           <Trash2 size={22} />
         </button>

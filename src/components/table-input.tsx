@@ -4,11 +4,13 @@ interface TableInputProps {
   value: "#" | "0" | "1"
   index: number
   onChange: (value: string, index: number) => void
+  ariaLabel?: string
 }
 export default function TableInput({
   value,
   onChange,
   index,
+  ariaLabel,
 }: TableInputProps) {
   const colors = {
     "#": "bg-orange-100",
@@ -31,7 +33,7 @@ export default function TableInput({
     <button
       className={cn("w-full", colors[value])}
       onClick={nextState}
-      aria-label="Change value"
+      aria-label={ariaLabel}
     >
       {value}
     </button>
