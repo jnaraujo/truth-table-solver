@@ -2,6 +2,7 @@ import { useTruthTableStore } from "@/store/truth-table-store"
 import { useCallback, useMemo } from "react"
 import TableInput from "./table-input"
 import { cn } from "@/lib/utils"
+import { Trash2 } from "lucide-react"
 
 interface Props {
   lineIndex: number
@@ -39,7 +40,7 @@ export default function TableLine({ lineIndex }: Props) {
 
   return (
     <div
-      className={cn("flex gap-8 rounded-sm px-1", {
+      className={cn("group flex gap-8 rounded-sm px-1", {
         "bg-red-200": isKeyDuplicated(line[0]),
       })}
     >
@@ -65,17 +66,15 @@ export default function TableLine({ lineIndex }: Props) {
         </div>
       </div>
 
-      <div>
-        <button
-          type="button"
-          className="rounded bg-red-500 px-2 py-1 text-red-50"
-          onClick={() => {
-            removeIndex(lineIndex)
-          }}
-        >
-          Remover
-        </button>
-      </div>
+      <button
+        type="button"
+        className="w-10 rounded px-2 py-1 text-red-500 opacity-0 transition-opacity group-hover:opacity-100"
+        onClick={() => {
+          removeIndex(lineIndex)
+        }}
+      >
+        <Trash2 />
+      </button>
     </div>
   )
 }
