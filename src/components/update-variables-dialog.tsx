@@ -28,6 +28,9 @@ export default function UpdateVariablesDialog({ children, asChild }: Props) {
 
   const [value, setValue] = useState<string>(variables.join(", "))
 
+  const hasDuplicates =
+    new Set(value.split(",")).size !== value.split(",").length
+
   function handleUpdateVariables() {
     if (value.split(",").length !== variables.length) {
       clear()
@@ -55,14 +58,19 @@ export default function UpdateVariablesDialog({ children, asChild }: Props) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
+
+          {hasDuplicates && (
+            <p className="mt-2 text-sm text-red-500">
+              Não é possível adicionar variáveis duplicadas.
+            </p>
+          )}
         </div>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button
-              type="submit"
               onClick={handleUpdateVariables}
-              disabled={!hasChanged}
+              disabled={!hasChanged || hasDuplicates}
               variant="destructive"
             >
               Editar variáveis
