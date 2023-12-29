@@ -9,7 +9,7 @@ export default function Cell({
 }) {
   return (
     <div
-      className={cn("flex w-14 items-center justify-center md:w-20", className)}
+      className={cn("flex w-10 items-center justify-center md:w-12", className)}
     >
       {children}
     </div>

@@ -25,41 +25,39 @@ export default function Line({ lineIndex }: Props) {
   return (
     <div
       className={cn(
-        "group flex h-8 w-full justify-center gap-8 rounded-md px-1",
+        "group flex h-8 w-full justify-center gap-4 rounded-md px-1",
         {
           "bg-red-100": isKeyDuplicated,
         },
       )}
     >
-      <div className="flex gap-2">
-        {inputs.map((value, index) => (
-          <Cell key={index}>
-            <Input
-              index={index}
-              value={value as "#" | "0" | "1"}
-              onChange={(value: string, index: number) => {
-                const newInputs = [...inputs]
-                newInputs[index] = value
-                updateValueFromIndex(lineIndex, [newInputs.join(""), output])
-              }}
-              ariaLabel={`Change input ${index} of line ${lineIndex}`}
-            />
-          </Cell>
-        ))}
-
-        <Cell className="ml-8">
+      {inputs.map((value, index) => (
+        <Cell key={index}>
           <Input
-            index={inputs.length}
-            value={output as "#" | "0" | "1"}
-            onChange={(value: string) => {
-              updateValueFromIndex(lineIndex, [inputs.join(""), value])
+            index={index}
+            value={value as "#" | "0" | "1"}
+            onChange={(value: string, index: number) => {
+              const newInputs = [...inputs]
+              newInputs[index] = value
+              updateValueFromIndex(lineIndex, [newInputs.join(""), output])
             }}
-            ariaLabel={`Change output of line ${lineIndex}`}
+            ariaLabel={`Change input ${index} of line ${lineIndex}`}
           />
         </Cell>
-      </div>
+      ))}
 
-      <div className="flex w-14 items-center justify-center md:w-20">
+      <Cell>
+        <Input
+          index={inputs.length}
+          value={output as "#" | "0" | "1"}
+          onChange={(value: string) => {
+            updateValueFromIndex(lineIndex, [inputs.join(""), value])
+          }}
+          ariaLabel={`Change output of line ${lineIndex}`}
+        />
+      </Cell>
+
+      <Cell>
         <button
           type="button"
           className="rounded px-2 py-1 text-red-500 transition-opacity group-hover:opacity-100 md:opacity-0"
@@ -68,9 +66,9 @@ export default function Line({ lineIndex }: Props) {
           }}
           aria-label="Remove line"
         >
-          <Trash2 size={22} />
+          <Trash2 size={20} />
         </button>
-      </div>
+      </Cell>
     </div>
   )
 }

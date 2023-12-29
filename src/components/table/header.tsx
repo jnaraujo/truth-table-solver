@@ -1,28 +1,24 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
 import { Wrench } from "lucide-react"
+import Cell from "./cell"
 
 export default function Header() {
   const variables = useTruthTableStore((s) => s.variables)
 
   return (
-    <header className="flex justify-center gap-8 border-b border-zinc-600 px-1 py-1">
-      <div className="flex gap-2">
-        {variables.map((item, index) => (
-          <p
-            key={item + index}
-            className="flex w-14 items-center justify-center md:w-20"
-          >
-            {item}
-          </p>
-        ))}
-      </div>
-      <div className="flex gap-2">
-        <p className="flex w-14 items-center justify-center md:w-20">Saída</p>
-      </div>
+    <header className="flex justify-center gap-4 border-b border-zinc-600 px-1 py-1">
+      {variables.map((item, index) => (
+        <Cell key={item + index}>
+          <p>{item}</p>
+        </Cell>
+      ))}
+      <Cell>
+        <p>Saída</p>
+      </Cell>
 
-      <div className="flex w-14 items-center justify-center md:w-20">
+      <Cell>
         <Wrench size={18} className="text-zinc-500" />
-      </div>
+      </Cell>
     </header>
   )
 }
