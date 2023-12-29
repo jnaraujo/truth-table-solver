@@ -15,8 +15,8 @@ export default function Table() {
 
   return (
     <article className="flex w-full flex-col gap-4">
-      <div className="max-w-[90vw] overflow-hidden overflow-x-auto md:w-full">
-        <div className="mx-auto flex w-fit flex-col gap-2 p-2">
+      <div className="max-w-[90vw] overflow-x-auto md:w-full">
+        <div className="flex min-w-min flex-col gap-2 p-2">
           <Header />
 
           <div className="flex min-h-40 flex-col items-center gap-2">
