@@ -7,6 +7,7 @@ import {
 import { useTruthTableStore } from "@/store/truth-table-store"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 
 export default function TableTop() {
   const [equation, setEquation] = useState<string>("")
@@ -36,22 +37,27 @@ export default function TableTop() {
         />
       </form>
 
-      <div
-        className="flex gap-2 hover:cursor-pointer active:cursor-default"
-        onClick={() => {
-          navigator.clipboard.writeText(equation)
-          toast.success("Equação copiada para a área de transferência.", {
-            position: "top-right",
-          })
-        }}
-      >
-        Equação de Saída:{" "}
-        <output>
-          <pre className="rounded-md bg-zinc-200 px-2 transition-colors hover:bg-zinc-300">
-            {equation}
-          </pre>
-        </output>
-      </div>
+      <Tooltip>
+        <TooltipTrigger>
+          <div
+            className="group/equation flex gap-2 hover:cursor-pointer active:cursor-default"
+            onClick={() => {
+              navigator.clipboard.writeText(equation)
+              toast.success("Equação copiada para a área de transferência.", {
+                position: "top-right",
+              })
+            }}
+          >
+            Equação de Saída:{" "}
+            <output>
+              <pre className="rounded-md bg-zinc-200 px-2 transition-colors group-hover/equation:bg-zinc-300">
+                {equation}
+              </pre>
+            </output>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>Clique para copiar</TooltipContent>
+      </Tooltip>
     </div>
   )
 }
