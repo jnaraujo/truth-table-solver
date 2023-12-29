@@ -4,6 +4,7 @@ import Input from "./input"
 import { cn } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
 import Cell from "./cell"
+import { toast } from "sonner"
 
 interface Props {
   lineIndex: number
@@ -12,6 +13,7 @@ interface Props {
 export default function Line({ lineIndex }: Props) {
   const removeIndex = useTruthTableStore((s) => s.removeIndex)
   const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
+  const tableLength = useTruthTableStore((s) => s.table.length)
 
   const line = useTruthTableStore((s) => s.table[lineIndex])
 
@@ -62,6 +64,15 @@ export default function Line({ lineIndex }: Props) {
           type="button"
           className="rounded px-2 py-1 text-red-500 transition-opacity group-hover:opacity-100 md:opacity-0"
           onClick={() => {
+            if (tableLength <= 1) {
+              toast.error("Não é possível remover a última linha.", {
+                className: "!text-red-600",
+                position: "top-right",
+                duration: 2000,
+              })
+              return
+            }
+
             removeIndex(lineIndex)
           }}
           aria-label="Remove line"
