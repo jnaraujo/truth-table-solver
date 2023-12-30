@@ -1,18 +1,20 @@
 import Footer from "@/components/footer"
 import Header from "@/components/header"
 import Table from "@/components/table"
+import UsageTip from "@/components/usage-tip"
 
 export function Component() {
   return (
-    <>
-      <div className="mx-auto mt-10 flex w-full max-w-screen-sm flex-col items-center gap-4 p-4">
-        <Header />
-        <main className="w-full">
-          <Table />
-        </main>
-      </div>
+    <div className="container mx-auto mt-10 flex max-w-screen-sm flex-1 flex-col">
+      <Header />
+
+      <main className="w-full">
+        <Table />
+      </main>
+
+      <UsageTip className="mt-12" />
 
       <Footer />
-    </>
+    </div>
   )
 }

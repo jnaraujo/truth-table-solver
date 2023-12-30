@@ -20,6 +20,15 @@ export default function Footer() {
           Charlie Coleman
         </a>
         .
+        <br />
+        <a
+          href="https://storyset.com/cute"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500"
+        >
+          Cute illustrations by Storyset
+        </a>
       </p>
     </footer>
   )
