@@ -20,7 +20,7 @@ export default function Header() {
   }, [variables, table, solve])
 
   return (
-    <header className="flex h-20 w-full flex-col gap-4">
+    <header className="flex min-h-24 w-full flex-col gap-4 md:min-h-20">
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="mt-auto flex h-16 items-center justify-center">
+    <footer className="mt-auto flex items-center justify-center py-4">
       <p className="text-center text-sm">
         <a
           href="https://github.com/jnaraujo/truth-table-solver"
