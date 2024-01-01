@@ -1,18 +1,11 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
 import Line from "./line"
-import { useMemo } from "react"
 import Header from "./header"
 import Footer from "./footer"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
 
 export default function Table() {
-  const tableLength = useTruthTableStore((s) => s.table.length)
-
-  const indexTable = useMemo(() => {
-    return Array.from({
-      length: tableLength,
-    }).map((_, index) => index)
-  }, [tableLength])
+  const table = useTruthTableStore((s) => s.table)
 
   return (
     <article className="flex w-full flex-col gap-4">
@@ -22,7 +15,7 @@ export default function Table() {
             <Header />
 
             <div className="flex flex-col items-center gap-2">
-              {indexTable.map((index) => (
+              {table.map((_, index) => (
                 <Line key={index} lineIndex={index} />
               ))}
             </div>

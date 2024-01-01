@@ -9,6 +9,7 @@ interface TruthTableStore {
   addValue(value: [string, string]): void
   updateValueFromIndex(index: number, value: [string, string]): void
   removeIndex(index: number): void
+  canRemoveIndex(): boolean
   clear(): void
 
   setVariables(variables: string[]): void
@@ -55,6 +56,9 @@ export const useTruthTableStore = create<TruthTableStore>()((set, get) => ({
       newArr.splice(index, 1)
       return { table: newArr }
     })
+  },
+  canRemoveIndex() {
+    return get().table.length > 1
   },
   isKeyDuplicated(key: string) {
     let founded = false

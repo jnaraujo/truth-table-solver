@@ -1,5 +1,5 @@
 import { useTruthTableStore } from "@/store/truth-table-store"
-import { useMemo } from "react"
+import { memo, useMemo } from "react"
 import Input from "./input"
 import { cn } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
@@ -11,10 +11,10 @@ interface Props {
   lineIndex: number
 }
 
-export default function Line({ lineIndex }: Props) {
+function Line({ lineIndex }: Props) {
   const removeIndex = useTruthTableStore((s) => s.removeIndex)
+  const canRemoveIndex = useTruthTableStore((s) => s.canRemoveIndex)
   const updateValueFromIndex = useTruthTableStore((s) => s.updateValueFromIndex)
-  const tableLength = useTruthTableStore((s) => s.table.length)
 
   const line = useTruthTableStore((s) => s.table[lineIndex])
 
@@ -64,7 +64,7 @@ export default function Line({ lineIndex }: Props) {
         <ConfirmDeleteLineDialog
           asChild
           onConfirm={() => {
-            if (tableLength <= 1) {
+            if (!canRemoveIndex()) {
               toast.error("Não é possível remover a última linha.", {
                 className: "!text-red-600",
                 position: "top-right",
@@ -88,3 +88,7 @@ export default function Line({ lineIndex }: Props) {
     </div>
   )
 }
+
+const MemoizedLine = memo(Line)
+
+export default MemoizedLine
