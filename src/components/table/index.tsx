@@ -18,7 +18,7 @@ export default function Table() {
     <article className="flex w-full flex-col gap-4">
       <div className="max-w-[90vw] overflow-x-auto md:w-full">
         <ScrollArea className="h-[50vh] p-3 md:h-[60vh]">
-          <div className="flex w-max flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <Header />
 
             <div className="flex flex-col items-center gap-2">

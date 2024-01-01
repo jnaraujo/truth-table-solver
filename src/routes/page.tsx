@@ -5,7 +5,7 @@ import UsageTip from "@/components/usage-tip"
 
 export function Component() {
   return (
-    <div className="container mx-auto mt-10 flex max-w-screen-sm flex-1 flex-col">
+    <div className="container mx-auto mt-10 flex max-w-screen-md flex-1 flex-col">
       <Header />
 
       <main className="w-full">
