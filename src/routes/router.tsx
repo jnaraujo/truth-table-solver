@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
 import Layout from "./layout.tsx"
-import Home from "./page.tsx"
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +8,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        lazy: () => import("./page.tsx"),
       },
     ],
   },
