@@ -7,10 +7,8 @@ import useTableSolver from "@/hooks/useTableSolver"
 
 export default function Header() {
   const [equation, setEquation] = useState<string>("")
-  const { table, variables } = useTruthTableStore((s) => ({
-    table: s.table,
-    variables: s.variables,
-  }))
+  const table = useTruthTableStore((s) => s.table)
+  const variables = useTruthTableStore((s) => s.variables)
   const { solve } = useTableSolver()
 
   useEffect(() => {
