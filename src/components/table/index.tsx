@@ -1,12 +1,9 @@
-import { useTruthTableStore } from "@/store/truth-table-store"
-import Line from "./line"
 import Header from "./header"
 import Footer from "./footer"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
+import Lines from "./lines"
 
 export default function Table() {
-  const table = useTruthTableStore((s) => s.table)
-
   return (
     <article className="flex w-full flex-col gap-4">
       <div className="max-w-[90vw] overflow-x-auto md:w-full">
@@ -14,11 +11,7 @@ export default function Table() {
           <div className="flex flex-col gap-2">
             <Header />
 
-            <div className="flex flex-col items-center gap-2">
-              {table.map((_, index) => (
-                <Line key={index} lineIndex={index} />
-              ))}
-            </div>
+            <Lines />
           </div>
 
           <ScrollBar orientation="horizontal" />
