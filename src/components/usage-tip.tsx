@@ -46,6 +46,8 @@ export default function UsageTip({ className }: Props) {
       <img
         src="/cat.svg"
         className="w-60 justify-self-center md:w-40 md:justify-self-end"
+        width="160"
+        height="160"
         loading="lazy"
       />
     </section>
