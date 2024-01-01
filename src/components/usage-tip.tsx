@@ -49,6 +49,7 @@ export default function UsageTip({ className }: Props) {
         width="160"
         height="160"
         loading="lazy"
+        alt="Cat playing with a rocket"
       />
     </section>
   )
