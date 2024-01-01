@@ -4,15 +4,9 @@ import { CopyMinus, Plus } from "lucide-react"
 import ConfirmDeleteDuplicatesDialog from "../confirm-delete-duplicates-dialog"
 
 export default function Footer() {
-  const { addValue, variables, removeDuplicateKeys } = useTruthTableStore(
-    (s) => {
-      return {
-        addValue: s.addValue,
-        variables: s.variables,
-        removeDuplicateKeys: s.removeDuplicateKeys,
-      }
-    },
-  )
+  const addValue = useTruthTableStore((s) => s.addValue)
+  const variables = useTruthTableStore((s) => s.variables)
+  const removeDuplicateKeys = useTruthTableStore((s) => s.removeDuplicateKeys)
 
   return (
     <div className="mt-2 flex w-full flex-col justify-between gap-2 md:flex-row">
