@@ -1,4 +1,3 @@
-import CatSvg from "@/assets/Cat astronaut-cuate.svg?react"
 import { cn } from "@/lib/utils"
 
 interface Props {
@@ -44,7 +43,10 @@ export default function UsageTip({ className }: Props) {
         </p>
       </div>
 
-      <CatSvg className="w-60 justify-self-center md:w-40 md:justify-self-end" />
+      <img
+        src="/cat.svg"
+        className="w-60 justify-self-center md:w-40 md:justify-self-end"
+      />
     </section>
   )
 }
