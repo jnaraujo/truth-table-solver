@@ -11,4 +11,19 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (
+            id.includes("react-router-dom") ||
+            id.includes("@remix-run") ||
+            id.includes("react-router")
+          ) {
+            return "@react-router"
+          }
+        },
+      },
+    },
+  },
 })
