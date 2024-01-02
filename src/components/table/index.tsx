@@ -7,7 +7,7 @@ export default function Table() {
   return (
     <article className="flex w-full flex-col gap-4">
       <div className="max-w-[90vw] overflow-x-auto md:w-full">
-        <ScrollArea className="h-[50vh] p-3 md:h-[60vh]">
+        <ScrollArea className="h-[50vh] p-2 md:h-[60vh] md:p-3">
           <div className="flex flex-col gap-2">
             <Header />
 
