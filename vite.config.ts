@@ -1,17 +1,18 @@
 import path from "path"
-import { defineConfig, splitVendorChunkPlugin } from "vite"
+import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import webfontDownload from "vite-plugin-webfont-dl"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), webfontDownload(), splitVendorChunkPlugin()],
+  plugins: [react(), webfontDownload()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
+    minify: "terser",
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -21,6 +22,10 @@ export default defineConfig({
             id.includes("react-router")
           ) {
             return "@react-router"
+          }
+
+          if (id.includes("react") || id.includes("react-dom")) {
+            return "react"
           }
         },
       },
