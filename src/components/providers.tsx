@@ -1,7 +1,7 @@
 import { router } from "@/routes/router"
-import { RouterProvider } from "react-router-dom"
 import { TooltipProvider } from "./ui/tooltip"
 import { Toaster } from "./ui/sonner"
+import { RouterProvider } from "@tanstack/react-router"
 
 export default function Providers() {
   return (

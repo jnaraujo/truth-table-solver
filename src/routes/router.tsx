@@ -1,16 +1,17 @@
-import { createBrowserRouter } from "react-router-dom"
 import Layout from "./layout.tsx"
 import Home from "./page.tsx"
+import { RootRoute, Route, Router } from "@tanstack/react-router"
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-    ],
-  },
-])
+const rootRoute = new RootRoute({
+  component: Layout,
+})
+
+const homeRouter = new Route({
+  getParentRoute: () => rootRoute,
+  path: "*",
+  component: Home,
+})
+
+const routeTree = rootRoute.addChildren([homeRouter])
+
+export const router = new Router({ routeTree })
