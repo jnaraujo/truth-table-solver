@@ -6,6 +6,7 @@ interface Props {
 export default function UsageTip({ className }: Props) {
   return (
     <section
+      id="tips"
       className={cn(
         "mx-auto grid grid-cols-1 items-center gap-2 rounded-2xl bg-orange-50 p-6 shadow-md md:grid-cols-[1fr_200px] md:py-4",
         className,

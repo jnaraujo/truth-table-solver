@@ -18,7 +18,7 @@ export default function Header() {
   }, [variables, table, solve])
 
   return (
-    <header className="flex min-h-24 w-full flex-col gap-4">
+    <header className="flex min-h-24 w-full flex-col gap-4 py-4">
       <div className="flex">
         <UpdateVariablesDialog>
           <Tooltip>
