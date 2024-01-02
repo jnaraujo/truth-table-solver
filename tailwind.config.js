@@ -8,7 +8,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Inter", fontFamily.sans],
+      sans: ["Inter Variable", fontFamily.sans],
       mono: [fontFamily.mono],
     },
     container: {
