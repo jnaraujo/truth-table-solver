@@ -31,14 +31,20 @@ export default function UpdateVariablesDialog({ children, asChild }: Props) {
   const hasDuplicates =
     new Set(value.split(",")).size !== value.split(",").length
 
+  const hasMoreThanFifteenEntries = value.split(",").length > 15
+
   function handleUpdateVariables() {
-    if (value.split(",").length !== variables.length) {
+    const hasVariablesLengthChanged =
+      value.split(",").length !== variables.length
+
+    if (hasVariablesLengthChanged) {
       clear()
     }
     setVariables(value.split(",").map((item) => item.trim()))
   }
 
   const hasChanged = value !== variables.join(", ")
+  const canUpdate = hasChanged && !hasDuplicates && !hasMoreThanFifteenEntries
   return (
     <Dialog>
       <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
@@ -64,13 +70,19 @@ export default function UpdateVariablesDialog({ children, asChild }: Props) {
               Não é possível adicionar variáveis duplicadas.
             </p>
           )}
+
+          {hasMoreThanFifteenEntries && (
+            <p className="mt-2 text-sm text-red-500">
+              Não é possível adicionar mais de 15 variáveis.
+            </p>
+          )}
         </div>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button
               onClick={handleUpdateVariables}
-              disabled={!hasChanged || hasDuplicates}
+              disabled={!canUpdate}
               variant="destructive"
             >
               Editar variáveis
