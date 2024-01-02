@@ -1,6 +1,12 @@
 import Layout from "./layout.tsx"
 import Home from "./page.tsx"
-import { RootRoute, Route, Router } from "@tanstack/react-router"
+import {
+  Navigate,
+  NotFoundRoute,
+  RootRoute,
+  Route,
+  Router,
+} from "@tanstack/react-router"
 
 const rootRoute = new RootRoute({
   component: Layout,
@@ -8,10 +14,15 @@ const rootRoute = new RootRoute({
 
 const homeRouter = new Route({
   getParentRoute: () => rootRoute,
-  path: "*",
+  path: "/",
   component: Home,
+})
+
+const notFoundRoute = new NotFoundRoute({
+  getParentRoute: () => rootRoute,
+  component: () => <Navigate to="/" />,
 })
 
 const routeTree = rootRoute.addChildren([homeRouter])
 
-export const router = new Router({ routeTree })
+export const router = new Router({ routeTree, notFoundRoute })
