@@ -11,8 +11,10 @@ export default defineConfig({
       fontsource: {
         families: [
           {
-            name: "Inter Variable",
+            name: "Inter",
             weights: [400, 500],
+            styles: ["normal"],
+            subset: "latin",
           },
         ],
       },
