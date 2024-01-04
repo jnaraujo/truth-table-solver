@@ -7,7 +7,7 @@ export default function Navbar() {
           alt="Logo"
           width="56"
           height="56"
-          className="h-12 w-12 md:h-14 md:w-14"
+          className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14"
         />
       </a>
 
